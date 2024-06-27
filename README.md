@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -10,3 +11,6 @@ Currently, two official plugins are available:
 =======
 # chic-stylin-client
 >>>>>>> 5ca198f672db9f5de52c9d2cd3f95c4fa13e1d13
+=======
+# chic-stylin-client
+>>>>>>> 5ca198f (Initial commit)
