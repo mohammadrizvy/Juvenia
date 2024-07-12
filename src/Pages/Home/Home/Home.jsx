@@ -7,7 +7,6 @@ import ContactUs from "../ContactUs/ContactUs";
 import PopularCollections from "../../PopularCollections/PopularCollections";
 import { Helmet } from "react-helmet-async";
 import { TestimonialsVariant1 } from "../Testimonial/Testimonial";
-import DashboardNavbar from "../../Dashboard/DasboardNavbar/DashboardNavbar";
 
 const Home = () => {
   return (
@@ -28,3 +27,4 @@ const Home = () => {
 };
 
 export default Home;
+

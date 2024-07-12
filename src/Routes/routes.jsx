@@ -14,12 +14,15 @@ import Dashboard from "../Layout/Dashboard";
 import Orders from "../Pages/Orders/Orders";
 import PaymentHistory from "../Pages/PaymentHistory/PaymentHistory";
 import ProfileLayout from "../Layout/ProfileLayout";
-import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
 import AddItems from "../Pages/Dashboard/AddItems/AddItems";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import AdminRoute from "./AdminRoute";
 import MainDashboard from "../Pages/Dashboard/MainDashboard/MainDashboard";
+import AllUsers from "../Pages/Dashboard/Users/AllUsers/AllUsers";
+import UserDetails from "../Pages/Dashboard/Users/UserDetails/EditUserInfo";
+import AddUsers from "../Pages/Dashboard/Users/AddUsers/AddUsers";
+import EditUserInfo from "../Pages/Dashboard/Users/UserDetails/EditUserInfo";
 
 export const router = createBrowserRouter([
   {
@@ -49,14 +52,15 @@ export const router = createBrowserRouter([
       {
         path: "/product-details/:id",
         element: <ProductDetails></ProductDetails>,
-        loader: ({ params }) =>
-          fetch(`http://localhost:7000/${params.id}`),
+        loader: ({ params }) => fetch(`http://localhost:7000/${params.id}`),
       },
       {
         path: "/check-out",
-        element: <PrivateRoute>
-          <CheckOut/>
-        </PrivateRoute> ,
+        element: (
+          <PrivateRoute>
+            <CheckOut />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/discount",
@@ -64,11 +68,12 @@ export const router = createBrowserRouter([
           <>
             <Discount></Discount>
           </>
-        ),PrivateRoute
+        ),
+        PrivateRoute,
       },
       {
         path: "profile",
-        element: <ProfileLayout/>,
+        element: <ProfileLayout />,
         children: [
           {
             path: "",
@@ -87,25 +92,64 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path : "dashboard",
-    element : <AdminRoute><Dashboard></Dashboard></AdminRoute> ,
-    children : [
+    path: "dashboard",
+    element: (
+      <AdminRoute>
+        <Dashboard></Dashboard>
+      </AdminRoute>
+    ),
+    children: [
       {
-        path : "",
-        element : <AdminRoute> <MainDashboard></MainDashboard> </AdminRoute>
+        path: "",
+        element: (
+          <AdminRoute>
+            <MainDashboard></MainDashboard>
+          </AdminRoute>
+        ),
       },
       {
-        path : "all-users",
-        element : <AdminRoute> <AllUsers/></AdminRoute>
+        path: "all-users",
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
       {
-        path : "manage-items",
-        element :<AdminRoute><ManageItems/></AdminRoute> 
+        path: "add-users",
+        element: (
+          <AdminRoute>
+            <AddUsers />
+          </AdminRoute>
+        ),
       },
       {
-        path : "add-items",
-        element :<AdminRoute><AddItems/></AdminRoute> 
+        path: "user-edit/:id",
+        element: (
+          <AdminRoute>
+            <EditUserInfo />
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:7000/users/${params.id}`),
       },
-    ]
-  }
+      
+      {
+        path: "manage-items",
+        element: (
+          <AdminRoute>
+            <ManageItems />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "add-items",
+        element: (
+          <AdminRoute>
+            <AddItems />
+          </AdminRoute>
+        ),
+      },
+    ],
+  },
 ]);

@@ -9,7 +9,7 @@ import { MyButton } from "../../Components/MyButton/MyButton";
 
 const Carousel = () => {
   return (
-    <div className=" mx-auto max-w-8xl">
+    <div className=" mx-auto max-w-7xl">
       <AwesomeSlider className="rounded-lg overflow-hidden">
         <div data-src={image2} className="relative">
           <div className=" text-center mt-36">

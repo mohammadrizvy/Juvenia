@@ -7,23 +7,34 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Button,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
 } from "@nextui-org/react";
-import Loader from "../../Components/Loader/Loader";
-import { MdFolderDelete } from "react-icons/md";
-import { FaRegUser } from "react-icons/fa";
+import Loader from "../../../Components/Loader/Loader";
+import { MdFolderDelete, MdOutlineDeleteSweep } from "react-icons/md";
+import { FaRegEdit, FaRegEye, FaRegUser } from "react-icons/fa";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import toast, { Toaster } from "react-hot-toast";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import BreadcrumbComponent from "../../Shared/BreadcrumbComponent";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import BreadcrumbComponent from "../../../Shared/BreadcrumbComponent";
 import Swal from "sweetalert2";
-import CollectionsHeader from "../../Components/CollectionsHeader/CollectionsHeader";
-import { MyButton } from "../../Components/MyButton/MyButton";
+import CollectionsHeader from "../../../Components/CollectionsHeader/CollectionsHeader";
+import { MyButton } from "../../../Components/MyButton/MyButton";
 import { CircleEllipsis, EllipsisVertical } from "lucide-react";
-import useUser from "../../../Hooks/useUsers";
+import useUser from "../../../../Hooks/useUsers";
+import { CiMenuKebab } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
+
 const AllUsers = () => {
+  
   const [axiosSecure] = useAxiosSecure();
 
-  const { data: users = [], error, isLoading, isError } = useUser();
+  const navigate = useNavigate(); 
+
+  const { data: users = [], error, isLoading, isError, refetch } = useUser();
 
   if (isLoading) {
     return <Loader />;
@@ -47,7 +58,6 @@ const AllUsers = () => {
           })
           .catch((error) => {
             console.error("Error making admin:", error);
-            toast.error("Failed to make admin");
           });
       }
     });
@@ -71,38 +81,44 @@ const AllUsers = () => {
           })
           .catch((error) => {
             console.error("Error removing admin:", error);
-            toast.error("Failed to remove admin");
           });
       }
     });
   };
 
-  const handleDeleteUser = (user) => {
+  const handleDeleteUser = (userId) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "Are you sure you want to delete this user?",
+      text: "This action cannot be undone!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure
-          .delete(`/users/${user._id}`)
+        axiosSecure.delete(`/users/${userId}`)
           .then((res) => {
-            if (res.data.deletedCount > 0) {
+            if (res.data.deletedCount) {
               toast.success("User deleted successfully");
               refetch();
             }
           })
           .catch((error) => {
             console.error("Error deleting user:", error);
-            toast.error("Failed to delete user");
           });
       }
     });
   };
+  
+
+ const handleUserEdit = (userId) => {
+   // Navigate to the user details page with the user ID
+   navigate(`/dashboard/user-edit/${userId}`);
+ };
+
+  
+  const iconClasses =
+    "text-xl text-default-500 pointer-events-none flex-shrink-0";
 
   return (
     <div>
@@ -111,6 +127,7 @@ const AllUsers = () => {
         <CollectionsHeader
           title={"All Members"}
           button={"Add user"}
+          link={"/dashboard/add-users"}
         ></CollectionsHeader>
       </div>
 
@@ -186,17 +203,47 @@ const AllUsers = () => {
                 {"Active"}
               </TableCell>
               <TableCell className="font-semibold text-sm border-b border-black">
-                {"2 jun 2024"}
+                {user.createdAt || "Unavailable"}
               </TableCell>
               <TableCell className="border-b items-center border-black">
-                {/* <MdFolderDelete
-                  className=" cursor-pointer"
-                  onClick={() => handleDeleteUser(user)}
-                  size={25}
-                  color="maroon"
-                  title="Delete User"
-                /> */}
-                <CircleEllipsis size={20} />
+                <Dropdown>
+                  <DropdownTrigger>
+                    <Button light color="" auto>
+                      <CircleEllipsis size={20} />
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu
+                    variant="faded"
+                    aria-label="Dropdown menu with icons"
+                  >
+                    
+
+                    <DropdownItem
+                      key="edit"
+                      shortcut="⌘⇧E"
+                      startContent={<FaRegEdit className={iconClasses} />}
+                      onClick={() => handleUserEdit(user._id)}
+                    >
+                      Edit
+                    </DropdownItem>
+
+                    <DropdownItem
+                      key="delete"
+                      className="text-danger"
+                      color="danger"
+                      shortcut="⌘⇧D"
+                      startContent={
+                        <MdOutlineDeleteSweep
+                          size={20}
+                          className={(iconClasses, "text-danger")}
+                        />
+                      }
+                      onClick={() => handleDeleteUser(user._id)}
+                    >
+                      Remove user
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
               </TableCell>
             </TableRow>
           ))}

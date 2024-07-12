@@ -49,6 +49,7 @@ const Navbar = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -222,6 +223,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      <AuthModal isOpen={isModalOpen} onClose={closeModal} />
       <AuthModal isOpen={isModalOpen} onClose={closeModal} />
       <hr />
     </div>

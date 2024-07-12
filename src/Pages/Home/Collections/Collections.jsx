@@ -178,6 +178,7 @@ const Collections = () => {
         </Card>
       </div>
     </div>
+    
   );
 };
 

@@ -198,9 +198,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                   label="Profile photo"
                   placeholder="Enter your Photo URL"
                   variant="bordered"
-                  {...register("photoURL", {
-                    required: "Photo URL is required",
-                  })}
+                  {...register("photoURL", )}
                 />
                 {errors.name && <span>{errors.name.message}</span>}
                 <Input

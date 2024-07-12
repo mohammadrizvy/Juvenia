@@ -1,12 +1,13 @@
 import React from "react";
 import BreadcrumbComponent from "../../Shared/BreadcrumbComponent";
-import { Input } from "@nextui-org/react";
+import { Input, Select, SelectItem } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
-import { ShoppingCart, ImageIcon, TagIcon } from "lucide-react";
+import { ShoppingCart, ImageIcon, TagIcon, ShoppingCartIcon } from "lucide-react";
 import { HiOutlineCurrencyBangladeshi } from "react-icons/hi";
 import { MyButton } from "../../Components/MyButton/MyButton";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { CgSelectO } from "react-icons/cg";
 
 const AddItems = () => {
   const {
@@ -21,16 +22,16 @@ const AddItems = () => {
     try {
       const response = await axiosSecure.post("/allCollections", {
         ...data,
-        price : parseFloat(data.price),
-        rating : parseFloat(data.rating),
-        image: data.imageUrl // Renaming the imageUrl field to image to match your MongoDB schema
+        price: parseFloat(data.price),
+        rating: parseFloat(data.rating),
+        image: data.imageUrl, // Renaming the imageUrl field to image to match your MongoDB schema
       });
-      console.log(data)
+      console.log(data);
       console.log("Product added successfully:", response.data);
-      toast.success("Product added successfully")
+      toast.success("Product added successfully");
     } catch (error) {
       console.error("Error adding product:", error);
-      toast.error("Error adding product")
+      toast.error("Error adding product");
     }
   };
 
@@ -38,7 +39,10 @@ const AddItems = () => {
     <div>
       <BreadcrumbComponent />
       <div className="flex justify-center items-center mt-20 ">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full bg-base-300 p-20 rounded-2xl shadow-md max-w-3xl">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full bg-base-300 p-20 rounded-2xl shadow-md max-w-3xl"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Product Name */}
             <div className="w-[100%] mx-auto">
@@ -60,18 +64,25 @@ const AddItems = () => {
             </div>
 
             {/* Category */}
-            <div className="w-[100%] mx-auto">
-              <Input
-                type="text"
-                label="Category"
-                placeholder="e.g., Men, Women"
-                labelPlacement="outside"
-                startContent={
-                  <ShoppingCart className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                }
-                {...register("category")}
-              />
-            </div>
+
+            <Select
+              label="Select category"
+              placeholder="e.g., Men, Women"
+              labelPlacement="outside"
+              className="max-w-xs"
+              disableSelectorIconRotation
+              selectorIcon={<CgSelectO />}
+              startContent={
+                <ShoppingCartIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+              }
+              {...register("category")}
+            >
+              <SelectItem>Popular</SelectItem>
+              <SelectItem>Man</SelectItem>
+              <SelectItem>Woman</SelectItem>
+              <SelectItem isDisabled >Shoe</SelectItem>
+              <SelectItem isDisabled >Watch</SelectItem>
+            </Select>
 
             {/* Description */}
             <div className="w-[100%] mx-auto">
@@ -125,16 +136,15 @@ const AddItems = () => {
           </div>
 
           <div className="mt-4 flex justify-center">
-            <MyButton
-              color="primary"
-              size="md"
-              type="submit"
-            >
+            <MyButton color="primary" size="md" type="submit">
               Submit
             </MyButton>
           </div>
-            <p  className="mt-4">NOTE : <br /> 1 . Before adding products you must know there are 3 categoris they are  "Popular"  "Man" "Woman" <br />
-            2 . Add price like this : 1700 , 200 , 8000    </p>
+          <p className="mt-4">
+            NOTE : <br /> 1 . Before adding products you must know there are 3
+            categoris they are "Popular" "Man" "Woman" <br />2 . Add price like
+            this : 1700 , 200 , 8000{" "}
+          </p>
         </form>
       </div>
     </div>
@@ -143,9 +153,7 @@ const AddItems = () => {
 
 export default AddItems;
 
-
-
-//  {/* File Upload */}
+ {/* File Upload */}
 //  <div className="w-[100%] mx-auto">
 //  <label className="mb-1 text-sm font-medium">Upload Image</label>
 //  <input
@@ -155,4 +163,4 @@ export default AddItems;
 //  />
 // </div>
 
-// TODO : Impliment File Upload / Image Upload 
+// TODO : Impliment File Upload / Image Upload
