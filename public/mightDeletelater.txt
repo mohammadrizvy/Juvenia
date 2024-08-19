@@ -1,0 +1,34 @@
+ {
+    "id": 9,
+    "productName": "Black Workwear Denim Jacket",
+    "price": 149.99,
+    "category": "Man",
+    "image": "https://i.ibb.co/whLKHKL/BLACK-WORKWEAR-DENIM-JK.webp",
+    "rating": 4.5
+  },{
+    "id": 13,
+    "productName": "Nostalgic Blue ",
+    "price": 49.99,
+    "category": "Man",
+    "image": "https://i.ibb.co/bd8NCsV/NOSTALGIC-BLUE-DENIM-JK.webp",
+    "rating": 4.2
+  },
+
+  Womens : 
+   {
+    "id": 28,
+    "productName": "Straight Drape Sweatpants",
+    "price": 79.99,
+    "category": "Woman",
+    "image": "https://i.ibb.co/NKbkzNn/STRAIGHT-DRAPE-SWEATPANTS.webp",
+    "rating": 4.5
+  },
+
+   {
+    "id": 25,
+    "productName": "French Style Puff Sleeve Shirt",
+    "price": 99.99,
+    "category": "Woman",
+    "image": "https://i.ibb.co/X7SFkFt/FRENCH-STYLE-PUFF-SLEEVE-SHIRT.webp",
+    "rating": 4.4
+  },

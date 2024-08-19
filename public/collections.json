@@ -1,0 +1,184 @@
+[
+  {
+    "id": 1,
+    "productName": "BELT-BLAZER-SUIT-JK",
+    "price": 1999.99,
+    "category": "Popular",
+    "image": "https://i.ibb.co/XS6KYQq/BELT-BLAZER-SUIT-JK.jpg",
+    "rating": 4.8
+  },
+  {
+    "id": 2,
+    "productName": "VELVET-COLLAR-SHIRT",
+    "price": 1299.99,
+    "category": "Popular",
+    "image": "https://i.ibb.co/DQLXz34/VELVET-BUTTON-UP-COLLAR-SHIRT.jpg",
+    "rating": 4.7
+  },
+  
+  {
+    "id": 4,
+    "productName": "TWO-LAYER-JK",
+    "price": 2499.99,
+    "category": "Popular",
+    "image": "https://i.ibb.co/kK3pgZP/TWO-LAYER-COLLAR-WRIST-BELT-JK.jpg",
+    "rating": 4.9
+  },
+  {
+    "id": 5,
+    "productName": "LEATHER-JK",
+    "price": 999.99,
+    "category": "Popular",
+    "image": "https://i.ibb.co/J5syncz/LEATHER-JK.jpg",
+    "rating": 4.5
+  },
+  {
+    "id": 6,
+    "productName": "GREEN-LETTERED-HOODIE",
+    "price": 499.99,
+    "category": "Popular",
+    "image": "https://i.ibb.co/RBbf74R/GREEN-LETTERED-HOODIE.jpg",
+    "rating": 4.4
+  },
+  
+  {
+    "id": 8,
+    "productName": "BLUE-BUTTON-COLLAR-JK",
+    "price": 349.99,
+    "category": "Popular",
+    "image": "https://i.ibb.co/dMBxN9x/BLUE-BUTTON-COLLAR-JK.webp",
+    "rating": 4.7
+  },
+ 
+  {
+    "id": 11, 
+    "productName": "Hooded Leather Jacket",
+    "price": 199.99,
+    "category": "Man",
+    "image": "https://i.ibb.co/CW27dLq/HOODED-LEATHER-JK.jpg",
+    "rating": 4.6
+  },
+  {
+    "id": 12,
+    "productName": "Music Embroidery Jacket",
+    "price": 79.99,
+    "category": "Man",
+    "image": "https://i.ibb.co/Vws2jrR/MUSIC-EMBROIDERY-LEATHER-VARSITY-JK.webp",
+    "rating": 4.4
+  },
+  
+  {
+    "id": 14,
+    "productName": "Suede Motorcycle Jacket",
+    "price": 129.99,
+    "category": "Man",
+    "image": "https://i.ibb.co/3v2zRt4/SUEDE-MOTORCYCLE-NECK-COLLAR-JK.webp",
+    "rating": 4.5
+  },
+  {
+    "id": 15,
+    "productName": "Suede Collar Jacket",
+    "price": 59.99,
+    "category": "Man",
+    "image": "https://i.ibb.co/5sFLQJH/SUEDE-NECK-MOTORCYCLE-COLLAR-JK.webp",
+    "rating": 4.1
+  },
+  {
+    "id": 16,
+    "productName": "Varsity Bomber Jacket",
+    "price": 99.99,
+    "category": "Man",
+    "image": "https://i.ibb.co/qgY2RvW/VARSITY-BOMBER-JK.jpg",
+    "rating": 4.3
+  },
+  {
+    "id": 13,
+    "productName": "Nostalgic Blue ",
+    "price": 49.99,
+    "category": "Man",
+    "image": "https://i.ibb.co/bd8NCsV/NOSTALGIC-BLUE-DENIM-JK.webp",
+    "rating": 4.2
+  },
+  {
+    "id": 17,
+    "productName": "Woolen Collar Coat Jacket",
+    "price": 39.99,
+    "category": "Man",
+    "image": "https://i.ibb.co/tmF93Kb/WOOLEN-COLLAR-COAT-JK.jpg",
+    "rating": 4.4
+  },
+  {
+    "id": 18,
+    "productName": "Woolen Duffle Hooded Coat",
+    "price": 29.99,
+    "category": "Man",
+    "image": "https://i.ibb.co/BqZnKvz/WOOLEN-DUFFLE-HOODED-COAT.jpg",
+    "rating": 4.2
+  },
+  
+  {
+    "id": 20,
+    "productName": "Black Velvet French ",
+    "price": 89.99,
+    "category": "Woman",
+    "image": "https://i.ibb.co/C7R3MzD/BLACK-VELVET-FRENCH-COLLAR-DRESS.webp",
+    "rating": 4.4
+  },
+  {
+    "id": 21,
+    "productName": "Casual Straight Pants",
+    "price": 79.99,
+    "category": "Woman",
+    "image": "https://i.ibb.co/Kbmc42s/CASUAL-WIDE-STRAIGHT-PANTS.webp",
+    "rating": 4.6
+  },
+  {
+    "id": 22,
+    "productName": "Lettered Graphic Longsleeve",
+    "price": 129.99,
+    "category": "Woman",
+    "image": "https://i.ibb.co/YdspTzQ/CROP-LETTERED-GRAPHIC-LONGSLEEVE.webp",
+    "rating": 4.5
+  },
+  {
+    "id": 23,
+    "productName": "Drape Straight Sweatpants",
+    "price": 49.99,
+    "category": "Woman",
+    "image": "https://i.ibb.co/3z5vkCh/DRAWSTRING-DRAPE-STRAIGHT-SWEATPANTS.webp",
+    "rating": 4.3
+  },
+  {
+    "id": 24,
+    "productName": "Wide Straight Cargo",
+    "price": 149.99,
+    "category": "Woman",
+    "image": "https://i.ibb.co/1XqPKMs/DRAWSTRING-WIDE-STRAIGHT-CARGO.webp",
+    "rating": 4.6
+  },
+ 
+  {
+    "id": 26,
+    "productName":" Zip Up Hoodie",
+    "price": 59.99,
+    "category": "Woman",
+    "image": "https://i.ibb.co/ngVhTyj/PINK-EMBROIDERED-ZIP-UP-HOODIE.webp",
+    "rating": 4.2
+  },
+  {
+    "id": 27,
+    "productName": "Star Zip Up Hoodie",
+    "price": 39.99,
+    "category": "Woman",
+    "image": "https://i.ibb.co/74g8tMM/STAR-EMBROIDERED-ZIP-UP-HOODIE.jpg",
+    "rating": 4.1
+  },{
+    "id": 19,
+    "productName": "Black Retro Sweatpants",
+    "price": 199.99,
+    "category": "Woman",
+    "image": "https://i.ibb.co/HDcW834/BLACK-RETRO-STYLED-STRIPED-WIDE-SWEATPANTS.webp",
+    "rating": 4.7
+  }
+ 
+]
