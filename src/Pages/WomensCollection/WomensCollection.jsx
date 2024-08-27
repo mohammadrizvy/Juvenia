@@ -3,7 +3,6 @@ import CollectionsHeader from "../Components/CollectionsHeader/CollectionsHeader
 import { StarIcon } from "@heroicons/react/24/solid";
 import PaginationButton from "../Components/Pagination/PaginationButton/PaginationButton";
 import { Helmet } from "react-helmet-async";
-import useCollection from "../../Hooks/useCollection";
 import { MyButton } from "../Components/MyButton/MyButton";
 import Loader from "../Components/Loader/Loader";
 import { Skeleton } from "@nextui-org/react";
@@ -14,9 +13,10 @@ import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
 import AuthModal from "../authModal/AuthModal";
 import LazyLoad from "react-lazy-load";
+import useCollection from "../../Hooks/useCollection";
 
 const WomensCollection = () => {
-  const [collection, loading] = useCollection();
+  const {data :collection = []  , refacth , isLoading} = useCollection();
   const womensItem = collection.filter((item) => item.category === "Woman");
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -87,7 +87,7 @@ const WomensCollection = () => {
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return <Loader />;
   }
   

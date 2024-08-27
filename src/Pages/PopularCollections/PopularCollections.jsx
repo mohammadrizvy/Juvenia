@@ -11,7 +11,7 @@ import AuthModal from "../authModal/AuthModal";
 import LazyLoad from "react-lazy-load";
 
 const PopularCollections = () => {
-  const [collection] = useCollection();
+  const {data :collection = []  , refacth , isLoading} = useCollection();
   const { user } = useContext(AuthContext);
   const popularItems = collection.filter((item) => item.category === "Popular");
   const navigate = useNavigate();

@@ -29,6 +29,10 @@ const Carts = () => {
     return sortedCart.reduce((acc, item) => acc + item.price, 0);
   }, [sortedCart]);
 
+  const deliveryCharge = 150; // Set your delivery charge here
+
+  const total = subtotal + deliveryCharge; // Calculate the total including the delivery charge
+
   if (isLoading) {
     return <Loader />;
   }
@@ -64,7 +68,7 @@ const Carts = () => {
       <Helmet>
         <title>Juvénia | My Cart</title>
       </Helmet>
-<Toaster position="top-center"></Toaster>
+      <Toaster position="top-center" />
       <div className="min-h-screen">
         <h1 className="text-center my-8 text-3xl font-bold">Shopping Cart</h1>
 
@@ -124,13 +128,13 @@ const Carts = () => {
               Shipping & taxes calculated at checkout
             </p>
             <p className="text-lg font-semibold">
-              Subtotal : {subtotal.toFixed(2)} TK
+              Subtotal : {subtotal} TK
             </p>
             <p className="text-lg border-b-2 border-black pb-3 font-semibold">
-              Delivery Charge : {"150"} TK
+              Delivery Charge : {deliveryCharge} TK
             </p>
             <p className="text-xl mt-3 font-semibold ">
-              Total Tk : {subtotal + 150}
+              Total : {total} TK
             </p>
           </div>
           <div className="flex justify-between items-center">

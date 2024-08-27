@@ -78,7 +78,7 @@ const Navbar = () => {
       <div className="navbar  mt-2 flex items-center justify-between px-4">
         <div className="navbar-start flex items-center">
           <Link to="/">
-            <img className="w-[200px]" src={"https://i.ibb.co/Zz05jsY/logo2.png"} alt="" />
+            <img className="w-[200px]" src={"../../../public/logo2.png"} alt="" />
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex space-x-10">

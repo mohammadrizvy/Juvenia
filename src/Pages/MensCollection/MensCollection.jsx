@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import CollectionsHeader from "../Components/CollectionsHeader/CollectionsHeader";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { Helmet } from "react-helmet-async";
-import useCollection from "../../Hooks/useCollection";
 import { MyButton } from "../Components/MyButton/MyButton";
 import PaginationButton from "../Components/Pagination/PaginationButton/PaginationButton";
 import Loader from "../Components/Loader/Loader";
@@ -13,16 +12,17 @@ import { useNavigate } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
 import AuthModal from "../authModal/AuthModal";
 import LazyLoad from "react-lazy-load";
+import useCollection from "../../Hooks/useCollection";
 
 const MensCollection = () => {
-  const [collection, loading] = useCollection();
+  const {data :collection = []  , refacth , isLoading} = useCollection();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { refetch} = useCart();
   const [isModalOpen, setModalOpen] = useState(false);
 
   const mensItem = collection.filter((item) => item.category === "Man");
-  if (loading) {
+  if (isLoading) {
     return <Loader></Loader>;
   }
 

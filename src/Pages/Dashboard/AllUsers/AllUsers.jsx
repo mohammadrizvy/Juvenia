@@ -16,23 +16,14 @@ import toast, { Toaster } from "react-hot-toast";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import BreadcrumbComponent from "../../Shared/BreadcrumbComponent";
 import Swal from "sweetalert2";
-import CollectionsHeader from '../../Components/CollectionsHeader/CollectionsHeader';
+import CollectionsHeader from "../../Components/CollectionsHeader/CollectionsHeader";
 import { MyButton } from "../../Components/MyButton/MyButton";
 import { CircleEllipsis, EllipsisVertical } from "lucide-react";
+import useUser from "../../../Hooks/useUsers";
 const AllUsers = () => {
   const [axiosSecure] = useAxiosSecure();
 
-  const {
-    data: users = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/users");
-      return res.data;
-    },
-  });
+  const { data: users = [], error, isLoading, isError } = useUser();
 
   if (isLoading) {
     return <Loader />;
@@ -117,12 +108,14 @@ const AllUsers = () => {
     <div>
       <BreadcrumbComponent />
       <div className="mb-10">
-        <CollectionsHeader title={"All Members"} button={"Add user"}>
-        </CollectionsHeader>
+        <CollectionsHeader
+          title={"All Members"}
+          button={"Add user"}
+        ></CollectionsHeader>
       </div>
 
       <Toaster position="top-right" reverseOrder={false} />
-      <Table  aria-label="All users">
+      <Table aria-label="All users">
         <TableHeader className="border-b-2 border-r-2 border-black">
           <TableColumn className="text-large text-black">NAME</TableColumn>
           <TableColumn className="text-large text-black">Email</TableColumn>
@@ -143,8 +136,8 @@ const AllUsers = () => {
                 {user.email}
               </TableCell>
               <TableCell className="font-semibold text-sm border-b border-black">
-                <div  className="dropdown dropdown-top" >
-                <div
+                <div className="dropdown dropdown-top">
+                  <div
                     tabIndex={0}
                     role="button"
                     className=" m-1 flex items-center gap-2"
@@ -188,9 +181,6 @@ const AllUsers = () => {
                     )}
                   </ul>
                 </div>
-               
-                
-                
               </TableCell>
               <TableCell className="font-semibold text-sm border-b border-black">
                 {"Active"}

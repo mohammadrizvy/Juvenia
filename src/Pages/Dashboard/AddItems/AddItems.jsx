@@ -21,8 +21,11 @@ const AddItems = () => {
     try {
       const response = await axiosSecure.post("/allCollections", {
         ...data,
+        price : parseFloat(data.price),
+        rating : parseFloat(data.rating),
         image: data.imageUrl // Renaming the imageUrl field to image to match your MongoDB schema
       });
+      console.log(data)
       console.log("Product added successfully:", response.data);
       toast.success("Product added successfully")
     } catch (error) {
@@ -34,8 +37,8 @@ const AddItems = () => {
   return (
     <div>
       <BreadcrumbComponent />
-      <div className="flex justify-center items-center">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
+      <div className="flex justify-center items-center mt-20 ">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full bg-base-300 p-20 rounded-2xl shadow-md max-w-3xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Product Name */}
             <div className="w-[100%] mx-auto">
@@ -86,7 +89,7 @@ const AddItems = () => {
               <Input
                 type="number"
                 label="Price"
-                placeholder="e.g., 199.99"
+                placeholder="e.g., 2000"
                 labelPlacement="outside"
                 startContent={
                   <HiOutlineCurrencyBangladeshi className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
@@ -130,6 +133,8 @@ const AddItems = () => {
               Submit
             </MyButton>
           </div>
+            <p  className="mt-4">NOTE : <br /> 1 . Before adding products you must know there are 3 categoris they are  "Popular"  "Man" "Woman" <br />
+            2 . Add price like this : 1700 , 200 , 8000    </p>
         </form>
       </div>
     </div>

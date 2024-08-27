@@ -1,17 +1,20 @@
-import { useEffect, useState } from "react";
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from './useAxiosSecure';
 
 const useCollection = () => {
-  const [collection, setCollections] = useState([]);
-  const[loading, setLoading] = useState(true);
-  useEffect(() => {
-    fetch("http://localhost:7000/allCollections")
-      .then((res) => res.json())
-      .then((data) => {
-        setCollections(data);
-        setLoading(false);
-      });
-  }, []);
-  return [collection, loading];
+  const [axiosSecure] = useAxiosSecure(); // Destructure axiosSecure correctly
+
+  const { data, isLoading, refetch, error } = useQuery({
+    queryKey: ['collections'],
+    queryFn: async () => {
+      const res = await axiosSecure.get('/allCollections'); // Use axiosSecure correctly
+      return res.data;
+    },
+  });
+
+  console.log('Fetched Data:', data);
+
+  return { data, refetch, isLoading, error };
 };
 
 export default useCollection;

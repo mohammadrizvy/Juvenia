@@ -26,36 +26,17 @@ import Loader from "../../Components/Loader/Loader";
 import axios from "axios";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast, { Toaster, ToastIcon } from "react-hot-toast";
-import useCollection from "../../../Hooks/useCollection";
-
+import useCollection from "../../../Hooks/useCollection"
 const ManageItems = () => {
-  const [collection, loading,] = useCollection();
   const [axiosSecure] = useAxiosSecure();
 
-  if (loading) {
+ const {data : collection =[] , refacth , isLoading} = useCollection() ; 
+
+  if (isLoading) {
     return <Loader />;
   }
 
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this product?"
-    );
-    if (!confirmDelete) {
-      return;
-    }
-
-    try {
-      const response = await axiosSecure.delete(`/allCollections/${id}`);
-      if (response.data.success) {
-        toast.success("Product deleted successfully!");
-        refetch(); // Refresh the collection after deletion
-      } else {
-        toast.error("Failed to delete product.");
-      }
-    } catch (error) {
-      toast.error("An error occurred while deleting the product.");
-    }
-  };
+  
 
   const iconClasses =
     "text-xl text-default-500 pointer-events-none flex-shrink-0";
@@ -70,8 +51,8 @@ const ManageItems = () => {
         />
         <p className="mt-4">Total Product Available : {collection.length}</p>
       </div>
-      <div className="flex justify-center">
-        <Table aria-label="Shopping Cart">
+      <div className="flex justify-center  ">
+        <Table aria-label="Shopping Cart ">
           <TableHeader className="bg-gray-200">
             <TableColumn className="text-base">Product</TableColumn>
             <TableColumn className="text-base">Price</TableColumn>

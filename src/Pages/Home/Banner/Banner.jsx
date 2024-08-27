@@ -53,7 +53,7 @@ const Banner = () => {
             form stylish sneakers to <br />
             statement jackets
           </p>
-          <MyButton color="secoundary" size="md" className="mt-4 mb-3">
+          <MyButton color="secondary" size="md" className="mt-4 mb-3">
             Explore now <ArrowLongRightIcon className="size-6 text-black" />
           </MyButton>
           <br />
