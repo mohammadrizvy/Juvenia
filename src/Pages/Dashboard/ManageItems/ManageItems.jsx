@@ -26,18 +26,45 @@ import Loader from "../../Components/Loader/Loader";
 import axios from "axios";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast, { Toaster, ToastIcon } from "react-hot-toast";
-import useCollection from "../../../Hooks/useCollection"
+import useCollection from "../../../Hooks/useCollection";
+import Swal from "sweetalert2";
 const ManageItems = () => {
   const [axiosSecure] = useAxiosSecure();
 
- const {data : collection =[] , refacth , isLoading} = useCollection() ; 
+  const { data: collection = [], refacth, isLoading } = useCollection();
 
   if (isLoading) {
     return <Loader />;
   }
 
-  
-  
+const handleDeleteItems = (productId) => {
+  console.log(productId);
+  Swal.fire({
+    title: "Are you sure you want to delete this product?",
+    text: "This action can't be undone!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, Delete it!",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      axiosSecure
+        .delete(`/allCollections/manage-items/${productId}`)
+        .then((res) => {
+          if (res.data.deletedCount > 0) {
+            toast.success("Product deleted successfully");
+            refacth(); // Re-fetch the data to update the UI
+          } else {
+            toast.error("Failed to delete the product. Please try again.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error deleting product:", error);
+          toast.error("An error occurred while deleting the product.");
+        });
+    }
+  });
+};
 
   const iconClasses =
     "text-xl text-default-500 pointer-events-none flex-shrink-0";
@@ -115,7 +142,7 @@ const ManageItems = () => {
                             className={cn(iconClasses, "text-danger")}
                           />
                         }
-                        onClick={() => handleDelete(item._id)}
+                        onClick={() => handleDeleteItems(item._id)}
                       >
                         Delete product
                       </DropdownItem>
