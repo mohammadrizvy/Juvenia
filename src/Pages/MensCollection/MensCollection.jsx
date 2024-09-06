@@ -21,7 +21,7 @@ const MensCollection = () => {
   const { refetch} = useCart();
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const mensItem = collection.filter((item) => item.category === "Man");
+  const mensItem = collection.filter((item) => item.category === "Men");
   if (isLoading) {
     return <Loader></Loader>;
   }

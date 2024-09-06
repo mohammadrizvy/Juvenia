@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import useProductDetails from "../../Hooks/useProductDetails";
 import Loader from "../Components/Loader/Loader";
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
@@ -10,16 +10,15 @@ import { Building2, ClipboardCheck, Truck } from "lucide-react";
 import ProductAccordion from "./ProductAccordion/ProductAccordion";
 
 const ProductDetails = () => {
-  const { id } = useParams();
-  console.log(`Product ID from URL: ${id}`);
-  const { product, isLoading, error } = useProductDetails(id);
+  const product = useLoaderData();
+ 
 
-  if (isLoading) {
-    return <Loader></Loader>;
-  }
-  if (error) {
-    return <ErrorPage></ErrorPage>;
-  }
+  // if (isLoading) {
+  //   return <Loader></Loader>;
+  // }
+  // if (error) {
+  //   return <ErrorPage></ErrorPage>;
+  // }
 
   console.log("Product data:", product);
 
@@ -47,7 +46,7 @@ const ProductDetails = () => {
         {/* Product details */}
         <h1 className="text-3xl font-bold">{product.productName}</h1>
         <h1 className="text-base  mt-2">{product.description}</h1>
-        <p className="text-lg mt-2 font-bold">TK {product.price.toFixed(2)}</p>
+        <p className="text-lg mt-2 font-bold">TK {product.price}</p>
         <div className="flex items-center mt-2">
           <p className="text-sm font-semibold mr-2 ">Category:</p>{" "}
           <span className="text-sm font-semibold text-gray-500">
@@ -57,9 +56,10 @@ const ProductDetails = () => {
         <div className="flex mt-4 items-center">
           <div className=" w-[400px] mr-6">
             <Input
+            defaultValue="1"
               variant="bordered"
               key="email-input"
-              type="email"
+              type="number"
               label="QTY"
               labelPlacement="outside"
               radius="none"

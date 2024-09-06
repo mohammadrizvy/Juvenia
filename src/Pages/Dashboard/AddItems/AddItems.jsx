@@ -2,7 +2,12 @@ import React from "react";
 import BreadcrumbComponent from "../../Shared/BreadcrumbComponent";
 import { Input, Select, SelectItem } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
-import { ShoppingCart, ImageIcon, TagIcon, ShoppingCartIcon } from "lucide-react";
+import {
+  ShoppingCart,
+  ImageIcon,
+  TagIcon,
+  ShoppingCartIcon,
+} from "lucide-react";
 import { HiOutlineCurrencyBangladeshi } from "react-icons/hi";
 import { MyButton } from "../../Components/MyButton/MyButton";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
@@ -12,6 +17,7 @@ import { CgSelectO } from "react-icons/cg";
 const AddItems = () => {
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -29,6 +35,7 @@ const AddItems = () => {
       console.log(data);
       console.log("Product added successfully:", response.data);
       toast.success("Product added successfully");
+      reset(); 
     } catch (error) {
       console.error("Error adding product:", error);
       toast.error("Error adding product");
@@ -65,24 +72,21 @@ const AddItems = () => {
 
             {/* Category */}
 
-            <Select
-              label="Select category"
-              placeholder="e.g., Men, Women"
-              labelPlacement="outside"
-              className="max-w-xs"
-              disableSelectorIconRotation
-              selectorIcon={<CgSelectO />}
-              startContent={
-                <ShoppingCartIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-              }
-              {...register("category")}
-            >
-              <SelectItem>Popular</SelectItem>
-              <SelectItem>Man</SelectItem>
-              <SelectItem>Woman</SelectItem>
-              <SelectItem isDisabled >Shoe</SelectItem>
-              <SelectItem isDisabled >Watch</SelectItem>
-            </Select>
+            <div className="w-[100%] mx-auto">
+              <Input
+                type="text"
+                label="Select category"
+                placeholder="e.g., Men, Women"
+                labelPlacement="outside"
+                startContent={
+                  <ShoppingCartIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                }
+                {...register("category")}
+              />
+              {errors.productName && (
+                <p className="text-red-500">{errors.productName.message}</p>
+              )}
+            </div>
 
             {/* Description */}
             <div className="w-[100%] mx-auto">
@@ -142,7 +146,7 @@ const AddItems = () => {
           </div>
           <p className="mt-4">
             NOTE : <br /> 1 . Before adding products you must know there are 3
-            categoris they are "Popular" "Man" "Woman" <br />2 . Add price like
+            categoris they are "Popular" "Men" "Women" <br />2 . Add price like
             this : 1700 , 200 , 8000{" "}
           </p>
         </form>
@@ -153,7 +157,9 @@ const AddItems = () => {
 
 export default AddItems;
 
- {/* File Upload */}
+{
+  /* File Upload */
+}
 //  <div className="w-[100%] mx-auto">
 //  <label className="mb-1 text-sm font-medium">Upload Image</label>
 //  <input

@@ -6,7 +6,7 @@ import { MyButton } from "../../Components/MyButton/MyButton";
 const ContactUs = () => {
   return (
     <div className="hero  ">
-      <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="hero-content gap-10 flex-col lg:flex-row-reverse">
         <div className="">
           <MyButton className="mb-3" color="primary" size="sm" radius="full">
             join us
@@ -33,7 +33,10 @@ const ContactUs = () => {
             <ChatBubbleLeftRightIcon className="size-6 text-black" />
           </label>
         </div>
-        <img src={image} className="max-w-lg rounded-lg  " />
+        <img
+          src="https://realtakai.com/cdn/shop/files/Untitled-2_21807b49-4519-4244-826f-b25bd1c8f4e5_540x.png?v=1644827252"
+          className="max-w-md rounded-lg  "
+        />
       </div>
     </div>
   );

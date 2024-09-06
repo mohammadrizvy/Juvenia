@@ -37,34 +37,31 @@ const ManageItems = () => {
     return <Loader />;
   }
 
-const handleDeleteItems = (productId) => {
-  console.log(productId);
-  Swal.fire({
-    title: "Are you sure you want to delete this product?",
-    text: "This action can't be undone!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "Yes, Delete it!",
-    cancelButtonText: "Cancel",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      axiosSecure
-        .delete(`/allCollections/manage-items/${productId}`)
-        .then((res) => {
-          if (res.data.deletedCount > 0) {
-            toast.success("Product deleted successfully");
-            refacth(); // Re-fetch the data to update the UI
-          } else {
-            toast.error("Failed to delete the product. Please try again.");
-          }
-        })
-        .catch((error) => {
-          console.error("Error deleting product:", error);
-          toast.error("An error occurred while deleting the product.");
-        });
-    }
-  });
-};
+  const handleDeleteItems = (productId) => {
+    console.log(productId);
+    Swal.fire({
+      title: "Are you sure you want to delete this product?",
+      text: "This action can't be undone!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Delete it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/allCollections/manage-items/${productId}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              toast.success("Product deleted successfully");
+              refacth(); // Re-fetch the data to update the UI
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting product:", error);
+          });
+      }
+    });
+  };
 
   const iconClasses =
     "text-xl text-default-500 pointer-events-none flex-shrink-0";
@@ -83,6 +80,7 @@ const handleDeleteItems = (productId) => {
         <Table aria-label="Shopping Cart ">
           <TableHeader className="bg-gray-200">
             <TableColumn className="text-base">Product</TableColumn>
+            <TableColumn className="text-base">Category</TableColumn>
             <TableColumn className="text-base">Price</TableColumn>
             <TableColumn className="text-base">Rating</TableColumn>
             <TableColumn className="text-base">Actions</TableColumn>
@@ -100,6 +98,7 @@ const handleDeleteItems = (productId) => {
                     name={item.productName}
                   />
                 </TableCell>
+                <TableCell>{item.category}</TableCell>
                 <TableCell>{item.price} TK</TableCell>
                 <TableCell className="flex items-center gap-2 mt-6">
                   {item.rating}

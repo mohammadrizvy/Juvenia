@@ -52,7 +52,8 @@ export const router = createBrowserRouter([
       {
         path: "/product-details/:id",
         element: <ProductDetails></ProductDetails>,
-        loader: ({ params }) => fetch(`http://localhost:7000/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`http://localhost:7000/allCollections/${params.id}`),
       },
       {
         path: "/check-out",
@@ -133,7 +134,7 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:7000/users/${params.id}`),
       },
-      
+
       {
         path: "manage-items",
         element: (
