@@ -23,6 +23,7 @@ import AllUsers from "../Pages/Dashboard/Users/AllUsers/AllUsers";
 import UserDetails from "../Pages/Dashboard/Users/UserDetails/EditUserInfo";
 import AddUsers from "../Pages/Dashboard/Users/AddUsers/AddUsers";
 import EditUserInfo from "../Pages/Dashboard/Users/UserDetails/EditUserInfo";
+import UpdateProduct from "../Pages/Dashboard/UpdateProduct/UpdateProduct";
 
 export const router = createBrowserRouter([
   {
@@ -142,6 +143,18 @@ export const router = createBrowserRouter([
             <ManageItems />
           </AdminRoute>
         ),
+      },
+      {
+        path: "update-product/:id",
+        element: (
+          <AdminRoute>
+            <UpdateProduct />
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `http://localhost:7000/allCollections/${params.id}`
+          ),
       },
       {
         path: "add-items",

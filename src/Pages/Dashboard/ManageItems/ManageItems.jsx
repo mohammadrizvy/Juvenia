@@ -28,8 +28,11 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast, { Toaster, ToastIcon } from "react-hot-toast";
 import useCollection from "../../../Hooks/useCollection";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 const ManageItems = () => {
   const [axiosSecure] = useAxiosSecure();
+
+  const navigate = useNavigate()
 
   const { data: collection = [], refacth, isLoading } = useCollection();
 
@@ -62,6 +65,12 @@ const ManageItems = () => {
       }
     });
   };
+
+const handleUpdateProduct = (productId) => {
+  console.log(productId)
+  navigate(`/dashboard/update-product/${productId}`);
+}
+
 
   const iconClasses =
     "text-xl text-default-500 pointer-events-none flex-shrink-0";
@@ -127,6 +136,7 @@ const ManageItems = () => {
                         key="edit"
                         shortcut="⌘⇧E"
                         startContent={<FaRegEdit className={iconClasses} />}
+                        onClick={() => handleUpdateProduct(item._id)}
                       >
                         Edit
                       </DropdownItem>
