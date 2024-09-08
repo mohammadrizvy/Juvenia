@@ -7,6 +7,7 @@ import ContactUs from "../ContactUs/ContactUs";
 import PopularCollections from "../../PopularCollections/PopularCollections";
 import { Helmet } from "react-helmet-async";
 import { TestimonialsVariant1 } from "../Testimonial/Testimonial";
+import HotDeals from "../HotDeals/HotDeals";
 
 const Home = () => {
   return (
@@ -18,8 +19,9 @@ const Home = () => {
       <Banner></Banner>
       {/* <Carousel></Carousel> */}
       <TrustedBy></TrustedBy>
-      <Collections></Collections>
       <PopularCollections></PopularCollections>
+      <Collections></Collections>
+      <HotDeals></HotDeals>
       <TestimonialsVariant1></TestimonialsVariant1>
       <ContactUs></ContactUs>
     </div>

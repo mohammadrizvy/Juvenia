@@ -20,16 +20,63 @@ const UpdateProduct = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
+    setValue,
   } = useForm({
     defaultValues: {
-      productName: product.productName,
-      category: product.category,
-      description: product.description,
-      price: product.price,
-      rating: product.rating,
-      imageUrl: product.imageUrl,
+      productName: "",
+      category: "",
+      description: "",
+      price: "",
+      rating: "",
+      imageUrl: "",
+      discount: "0%", // Default discount is 0%
+      discountedPrice: "",
     },
   });
+
+  // Watch for changes in price and discount
+  const price = watch("price");
+  const discount = watch("discount");
+
+  // Update form values when product data is available
+  useEffect(() => {
+    if (product) {
+      reset({
+        productName: product.productName,
+        category: product.category,
+        description: product.description,
+        price: product.price,
+        rating: product.rating,
+        imageUrl: product.imageUrl,
+        discount: product.discount || "0%",
+        discountedPrice: product.discountedPrice || "",
+        brand: product.brand || "Juvenia",
+        isAvailable: product.isAvailable?.toString() || "true",
+        stock: product.stock || "",
+        availableColors: product.availableColors || "Black,Brown",
+        availableSizes: product.availableSizes || "M,L,XL,XXL",
+        recommendedProducts: product.recommendedProducts || "",
+      });
+    }
+  }, [product, reset]);
+
+  // Automatically calculate discounted price whenever price or discount changes
+  useEffect(() => {
+    const discountPercentage = parseFloat(discount) || 0;
+    const originalPrice = parseFloat(price) || 0;
+    if (
+      discountPercentage > 0 &&
+      discountPercentage <= 100 &&
+      originalPrice > 0
+    ) {
+      const discountedPrice =
+        originalPrice - (originalPrice * discountPercentage) / 100;
+      setValue("discountedPrice", discountedPrice); // Set the discounted price
+    } else {
+      setValue("discountedPrice", ""); // Clear the discounted price if conditions are not met
+    }
+  }, [discount, price, setValue]);
 
   const onSubmit = async (data) => {
     try {
@@ -39,14 +86,12 @@ const UpdateProduct = () => {
       );
       if (response.status === 200) {
         toast.success("Product updated successfully");
-        navigate("/dashboard/manage-products"); // Redirect after successful update
       }
     } catch (error) {
-      // toast.error("Error updating product");
       console.error("Error updating product:", error);
+      toast.error("Error updating product");
     }
   };
-
 
   return (
     <div>
@@ -56,7 +101,7 @@ const UpdateProduct = () => {
           title={"Update product info"}
           button={"Manage Product item"}
         />
-        <div className="flex justify-center items-center mt-10 ">
+        <div className="flex justify-center items-center mt-10">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="w-full bg-base-300 p-20 rounded-2xl shadow-md max-w-3xl"
@@ -130,6 +175,42 @@ const UpdateProduct = () => {
                 )}
               </div>
 
+              {/* Discount */}
+              <div className="w-full mx-auto">
+                <Input
+                  type="text"
+                  label="Discount"
+                  placeholder="e.g., 10%"
+                  labelPlacement="outside"
+                  {...register("discount", {
+                    validate: (value) => {
+                      const discountValue = parseFloat(
+                        value.replace("%", "").trim()
+                      );
+                      return !isNaN(discountValue) &&
+                        discountValue >= 0 &&
+                        discountValue <= 100
+                        ? true
+                        : "Discount must be a valid percentage between 0% and 100%";
+                    },
+                  })}
+                />
+                {errors.discount && (
+                  <p className="text-red-500">{errors.discount.message}</p>
+                )}
+              </div>
+
+              {/* Discounted Price */}
+              <div className="w-full mx-auto">
+                <Input
+                  type="number"
+                  label="Discounted Price"
+                  placeholder="e.g., 1800"
+                  labelPlacement="outside"
+                  {...register("discountedPrice")}
+                />
+              </div>
+
               {/* Rating */}
               <div className="w-full mx-auto">
                 <Input
@@ -164,20 +245,85 @@ const UpdateProduct = () => {
                   <p className="text-red-500">{errors.imageUrl.message}</p>
                 )}
               </div>
-            </div>
-            {/* File Upload */}
-            <div className="w-2/4 mx-auto mt-4 pb-4">
-              <label className="mb-1 text-sm text-center">Upload Image</label>
-              <input
-                type="file"
-                {...register("file")}
-                className="border bg-white rounded-lg p-2 w-full flex justify-center"
-              />
+
+              {/* Brand */}
+              <div className="w-full mx-auto">
+                <Input
+                  defaultValue="Juvenia"
+                  type="text"
+                  label="Brand"
+                  placeholder="e.g., Gucci"
+                  labelPlacement="outside"
+                  {...register("brand")}
+                />
+              </div>
+
+              {/* Is Available */}
+              <div className="w-full mx-auto">
+                <Input
+                  defaultValue="true"
+                  type="text"
+                  label="Is Available"
+                  placeholder="true or false"
+                  labelPlacement="outside"
+                  {...register("isAvailable")}
+                />
+              </div>
+
+              {/* Stock */}
+              <div className="w-full mx-auto">
+                <Input
+                  type="number"
+                  label="Stock"
+                  placeholder="e.g., 50"
+                  labelPlacement="outside"
+                  {...register("stock", { required: "Stock is required" })}
+                />
+                {errors.stock && (
+                  <p className="text-red-500">{errors.stock.message}</p>
+                )}
+              </div>
+
+              {/* Available Colors */}
+              <div className="w-full mx-auto">
+                <Input
+                  defaultValue="Black,Brown"
+                  type="text"
+                  label="Available Colors"
+                  placeholder="e.g., Red, Blue, Black"
+                  labelPlacement="outside"
+                  {...register("availableColors")}
+                />
+              </div>
+
+              {/* Available Sizes */}
+              <div className="w-full mx-auto">
+                <Input
+                  defaultValue="M,L,XL,XXL"
+                  type="text"
+                  label="Available Sizes"
+                  placeholder="e.g., M, L, XL"
+                  labelPlacement="outside"
+                  {...register("availableSizes")}
+                />
+              </div>
+
+              {/* Recommended Products */}
+              <div className="w-full mx-auto">
+                <Input
+                  type="text"
+                  label="Recommended Products"
+                  placeholder="e.g., Product1, Product2"
+                  labelPlacement="outside"
+                  {...register("recommendedProducts")}
+                />
+              </div>
             </div>
 
-            <div className="mt-4 flex justify-center">
-              <MyButton color="primary" size="md" type="submit">
-                Submit
+            <div className="w-full mx-auto mt-6 flex justify-center gap-3">
+              <MyButton color="primary" size="md" type="submit">Update</MyButton>
+              <MyButton className="border-none" size="md" color="secondary" variant="bordered" type="reset">
+                Reset
               </MyButton>
             </div>
           </form>

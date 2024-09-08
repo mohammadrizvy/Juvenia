@@ -25,13 +25,13 @@ const YouMayLike = ({ item }) => {
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
               <Link to={`/product-details/${product._id}`} key={product._id}>
-                <div className="p-4 text-white border">
+                <div  className="p-4 text-white border h-70 w-[96]">
                   <img
                     src={product.imageUrl}
                     alt={product.productName}
                     className="w-full h-48 object-cover"
                   />
-                  <h3 className="text-lg font-semibold mt-2">
+                  <h3 className="text-base font-semibold mt-2">
                     {product.productName}
                   </h3>
                   <p>{product.category}</p>

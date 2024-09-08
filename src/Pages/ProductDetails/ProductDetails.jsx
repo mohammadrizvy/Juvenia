@@ -58,7 +58,7 @@ const ProductDetails = () => {
         <div className="w-1/2 flex justify-center items-center">
           <img
             className="w-[500px]"
-            src={item?.image}
+            src={item?.imageUrl}
             alt={item?.productName}
           />
         </div>

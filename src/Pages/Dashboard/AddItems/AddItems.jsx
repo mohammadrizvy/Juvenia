@@ -37,6 +37,7 @@ const AddItems = () => {
       console.log("Product added successfully:", response.data);
       toast.success("Product added successfully");
       // TODO Use reset in here for reseting the website 
+      reset(); 
     } catch (error) {
       console.error("Error adding product:", error);
       toast.error("Error adding product");
@@ -46,11 +47,14 @@ const AddItems = () => {
   return (
     <div>
       <BreadcrumbComponent />
-      <div className="flex justify-center items-center mt-10">
+      <div className="flex justify-center items-center mt-5">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full bg-base-300 p-20 rounded-2xl shadow-md max-w-3xl"
         >
+          <h1 className="text-4xl text-center font-semibold pb-10">
+            Add Product
+          </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Product Name */}
             <div className="w-full mx-auto">
@@ -63,7 +67,7 @@ const AddItems = () => {
                   <TagIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                 }
                 {...register("productName", {
-                  // required: "Product Name is required",
+                  required: "Product Name is required",
                 })}
               />
               {errors.productName && (
@@ -82,7 +86,7 @@ const AddItems = () => {
                   <ShoppingCartIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                 }
                 {...register("category", {
-                  // // required: "Category is required",
+                  required: "Category is required",
                 })}
               />
               {errors.category && (
@@ -97,8 +101,13 @@ const AddItems = () => {
                 label="Description"
                 placeholder="e.g., Trendy leather jacket with hood"
                 labelPlacement="outside"
-                {...register("description")}
+                {...register("description", {
+                  required: "Description is requried",
+                })}
               />
+              {errors.category && (
+                <p className="text-red-500">{errors.description.message}</p>
+              )}
             </div>
 
             {/* Price */}
@@ -112,7 +121,7 @@ const AddItems = () => {
                   <HiOutlineCurrencyBangladeshi className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                 }
                 {...register("price", {
-                  // // required: "Price is required",
+                  required: "Price is required",
                 })}
               />
               {errors.price && (
@@ -123,7 +132,7 @@ const AddItems = () => {
             {/* Discount */}
             <div className="w-full mx-auto">
               <Input
-              defaultValue="0%"
+                defaultValue="0%"
                 type="text"
                 label="Discount"
                 placeholder="e.g., 10%"
@@ -135,7 +144,7 @@ const AddItems = () => {
             {/* Discounted Price */}
             <div className="w-full mx-auto">
               <Input
-              defaultValue=""
+                defaultValue=""
                 type="number"
                 label="Discounted Price"
                 placeholder="e.g., 1800"
@@ -152,7 +161,7 @@ const AddItems = () => {
                 placeholder="e.g., 4.6"
                 labelPlacement="outside"
                 {...register("rating", {
-                  // // required: "Rating is required",
+                  required: "Rating is required",
                 })}
               />
               {errors.rating && (
@@ -171,7 +180,7 @@ const AddItems = () => {
                   <ImageIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                 }
                 {...register("imageUrl", {
-                  // // required: "Image URL is required",
+                  required: "Image URL is required",
                 })}
               />
               {errors.imageUrl && (
@@ -210,20 +219,23 @@ const AddItems = () => {
                 label="Stock"
                 placeholder="e.g., 50"
                 labelPlacement="outside"
-                {...register("stock")}
+                {...register("stock", { required: "Stock is requried" })}
               />
+              {errors.category && (
+                <p className="text-red-500">{errors.stock.message}</p>
+              )}
             </div>
 
             {/* Available Colors */}
             <div className="w-full mx-auto">
               <Input
-              defaultValue="Black,Brown"
+                defaultValue="Black,Brown"
                 type="text"
                 label="Available Colors"
                 placeholder="e.g., Red, Blue, Green"
                 labelPlacement="outside"
                 {...register("availableColors", {
-                  // // required: "Available Colors are required",
+                  // required: "Available Colors are required",
                 })}
               />
               {errors.availableColors && (

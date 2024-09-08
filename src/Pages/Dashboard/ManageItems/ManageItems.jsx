@@ -107,7 +107,7 @@ const ManageItems = () => {
                   <User
                     avatarProps={{
                       radius: "md",
-                      src: item.image,
+                      src: item.imageUrl,
                       size: "lg",
                     }}
                     name={item.productName}

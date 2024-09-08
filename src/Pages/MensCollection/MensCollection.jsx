@@ -13,6 +13,7 @@ import useCart from "../../Hooks/useCart";
 import AuthModal from "../authModal/AuthModal";
 import LazyLoad from "react-lazy-load";
 import useCollection from "../../Hooks/useCollection";
+import ProductCard from "../Components/ProductCard/ProductCard";
 
 const MensCollection = () => {
   const {data :collection = []  , refacth , isLoading} = useCollection();
@@ -106,58 +107,12 @@ const MensCollection = () => {
       <Toaster></Toaster>
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  mb-1 items-center justify-center gap-24">
         {mensItem.map((item) => (
-          <div key={item.id} className=" card-compact w-80 mt-10">
-            <figure className="h-80 overflow-hidden">
-              <LazyLoad
-                threshold={0.95}
-                onContentVisible={() => {
-                  console.log("loaded!");
-                }}
-              >
-                <img
-                  onClick={() => handleProductDetails(item)}
-                  className="transform hover:scale-105 transition duration-300"
-                  src={item.image}
-                  alt={item.productName}
-                  style={{
-                    clipPath: "polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)",
-                  }}
-                />
-              </LazyLoad>
-            </figure>
-            <div className="card-body flex flex-col justify-between">
-              <h2 className="card-title -mt-2">{item.productName}</h2>
-              <p className="text-small -mt-3 ">{item.category}</p>
-              <div className="flex -mt-1">
-                <p className="text-small  font-semibold"> Tk {item.price}</p>
-                <div className="flex items-center">
-                  <StarIcon className="size-4 text-black" />
-                  <StarIcon className="size-4 text-black" />
-                  <StarIcon className="size-4 text-black" />
-                  <StarIcon className="size-4 text-black" />
-                  <p>({item.rating})</p>
-                </div>
-              </div>
-              <div className="card-actions justify-center">
-                <MyButton
-                  size="sm"
-                  onClick={() => handleAddToCart(item)}
-                  color="primary"
-                  className=" font-semibold w-[50%]"
-                >
-                  Add to cart
-                </MyButton>
-                <MyButton
-                  color="secoundary"
-                  variant="bordered"
-                  size="sm"
-                  className=" font-semibold w-[40%] "
-                >
-                  Buy Now
-                </MyButton>
-              </div>
-            </div>
-          </div>
+          <ProductCard
+          key={item._id}
+          item={item}
+          handleAddToCart={handleAddToCart}
+          handleProductDetails={handleProductDetails}
+          ></ProductCard>
         ))}
         <AuthModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
       </div>
