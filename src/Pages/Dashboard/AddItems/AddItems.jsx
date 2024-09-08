@@ -36,7 +36,7 @@ const AddItems = () => {
       });
       console.log("Product added successfully:", response.data);
       toast.success("Product added successfully");
-      reset();
+      // TODO Use reset in here for reseting the website 
     } catch (error) {
       console.error("Error adding product:", error);
       toast.error("Error adding product");

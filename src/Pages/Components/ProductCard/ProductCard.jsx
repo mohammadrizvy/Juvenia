@@ -38,12 +38,12 @@ const ProductCard = ({ item, handleProductDetails, handleAddToCart }) => {
         </figure>
 </Tilt>
         <div className="card-body">
-          <h2 className="card-title -mt-2">{item.productName}</h2>
+          <h2 className="card-title text-sm -mt-2">{item.productName}</h2>
           <p className="text-small -mt-3 ">
             {<item className="category"></item>}
           </p>
           <div className="flex -mt-1 ">
-            <p className="text-small  font-semibold">{item.price} BDT </p>
+            <p className="text-small text-gray-600  font-semibold">{item.price} BDT </p>
             <div className="flex items-center">
               <StarIcon className="size-4 text-black" />
               <StarIcon className="size-4 text-black" />

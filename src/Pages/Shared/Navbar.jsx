@@ -224,7 +224,7 @@ const Navbar = () => {
         </div>
       )}
       <AuthModal isOpen={isModalOpen} onClose={closeModal} />
-      <AuthModal isOpen={isModalOpen} onClose={closeModal} />
+      {/* <AuthModal isOpen={isModalOpen} onClose={closeModal} /> */}
       <hr />
     </div>
   );

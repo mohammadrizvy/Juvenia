@@ -32,7 +32,7 @@ import { useNavigate } from "react-router-dom";
 const ManageItems = () => {
   const [axiosSecure] = useAxiosSecure();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { data: collection = [], refacth, isLoading } = useCollection();
 
@@ -56,7 +56,7 @@ const ManageItems = () => {
           .then((res) => {
             if (res.data.deletedCount > 0) {
               toast.success("Product deleted successfully");
-              refacth(); // Re-fetch the data to update the UI
+              window.location.reload(); // Reload the page
             }
           })
           .catch((error) => {
@@ -66,11 +66,14 @@ const ManageItems = () => {
     });
   };
 
-const handleUpdateProduct = (productId) => {
-  console.log(productId)
-  navigate(`/dashboard/update-product/${productId}`);
-}
+  const handleUpdateProduct = (productId) => {
+    console.log(productId);
+    navigate(`/dashboard/update-product/${productId}`);
+  };
 
+  const handleViewProduct = (productId) => {
+    navigate(`/product-details/${productId}`);
+  };
 
   const iconClasses =
     "text-xl text-default-500 pointer-events-none flex-shrink-0";
@@ -115,7 +118,11 @@ const handleUpdateProduct = (productId) => {
                     ? item.availableColors.join(", ")
                     : "No colors available"}
                 </TableCell>
-                <TableCell>{item.availableSizes ? item.availableSizes.join(", ") : "No size availabe"}</TableCell>
+                <TableCell>
+                  {item.availableSizes
+                    ? item.availableSizes.join(", ")
+                    : "No size availabe"}
+                </TableCell>
                 <TableCell>{item.stock}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.price} TK</TableCell>
@@ -138,6 +145,9 @@ const handleUpdateProduct = (productId) => {
                         key="view"
                         shortcut="⌘N"
                         startContent={<FaRegEye className={iconClasses} />}
+                        onClick={() => {
+                          handleViewProduct(item._id);
+                        }}
                       >
                         View
                       </DropdownItem>
