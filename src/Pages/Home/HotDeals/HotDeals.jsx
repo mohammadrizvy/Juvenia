@@ -14,7 +14,7 @@ const HotDeals = () => {
   console.log("Discounted Products:", discountedProducts);
 
   return (
-    <div className="my-10">
+    <div className="my-10 ">
       <CollectionsHeader title={"Hot Deals"} button={"Explore more"} />
       <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-10 my-20">
         {discountedProducts.map((item) => (
