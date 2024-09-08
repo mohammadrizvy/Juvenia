@@ -25,8 +25,15 @@ const AddItems = () => {
         price: parseFloat(data.price),
         rating: parseFloat(data.rating),
         image: data.imageUrl, // Renaming the imageUrl field to image to match your MongoDB schema
+        stock: parseInt(data.stock),
+        discount: data.discount,
+        discountedPrice: parseFloat(data.discountedPrice),
+        brand: data.brand,
+        isAvailable: data.isAvailable === "true", // Converting string to boolean
+        availableColors: data.availableColors.split(","), // Converting comma-separated string to an array
+        availableSizes: data.availableSizes.split(","), // Converting comma-separated string to an array
+        recommendedProducts: data.recommendedProducts.split(","), // Converting comma-separated string to an array
       });
-      console.log(data);
       console.log("Product added successfully:", response.data);
       toast.success("Product added successfully");
       reset();
@@ -39,7 +46,7 @@ const AddItems = () => {
   return (
     <div>
       <BreadcrumbComponent />
-      <div className="flex justify-center items-center mt-10 ">
+      <div className="flex justify-center items-center mt-10">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full bg-base-300 p-20 rounded-2xl shadow-md max-w-3xl"
@@ -56,7 +63,7 @@ const AddItems = () => {
                   <TagIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                 }
                 {...register("productName", {
-                  required: "Product Name is required",
+                  // required: "Product Name is required",
                 })}
               />
               {errors.productName && (
@@ -75,7 +82,7 @@ const AddItems = () => {
                   <ShoppingCartIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                 }
                 {...register("category", {
-                  required: "Category is required",
+                  // // required: "Category is required",
                 })}
               />
               {errors.category && (
@@ -105,12 +112,36 @@ const AddItems = () => {
                   <HiOutlineCurrencyBangladeshi className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                 }
                 {...register("price", {
-                  required: "Price is required",
+                  // // required: "Price is required",
                 })}
               />
               {errors.price && (
                 <p className="text-red-500">{errors.price.message}</p>
               )}
+            </div>
+
+            {/* Discount */}
+            <div className="w-full mx-auto">
+              <Input
+              defaultValue="0%"
+                type="text"
+                label="Discount"
+                placeholder="e.g., 10%"
+                labelPlacement="outside"
+                {...register("discount")}
+              />
+            </div>
+
+            {/* Discounted Price */}
+            <div className="w-full mx-auto">
+              <Input
+              defaultValue=""
+                type="number"
+                label="Discounted Price"
+                placeholder="e.g., 1800"
+                labelPlacement="outside"
+                {...register("discountedPrice")}
+              />
             </div>
 
             {/* Rating */}
@@ -121,7 +152,7 @@ const AddItems = () => {
                 placeholder="e.g., 4.6"
                 labelPlacement="outside"
                 {...register("rating", {
-                  required: "Rating is required",
+                  // // required: "Rating is required",
                 })}
               />
               {errors.rating && (
@@ -140,7 +171,7 @@ const AddItems = () => {
                   <ImageIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                 }
                 {...register("imageUrl", {
-                  required: "Image URL is required",
+                  // // required: "Image URL is required",
                 })}
               />
               {errors.imageUrl && (
@@ -148,16 +179,103 @@ const AddItems = () => {
               )}
             </div>
 
-          </div>
-            {/* File Upload */}
-            <div className="w-2/4 mx-auto mt-4 pb-4">
-              <label className="mb-1 text-sm text-center">Upload Image</label>
-              <input
-                type="file"
-                {...register("file")}
-                className="border bg-white rounded-lg p-2 w-full flex justify-center"
+            {/* Brand */}
+            <div className="w-full mx-auto">
+              <Input
+                defaultValue="Juvenia"
+                type="text"
+                label="Brand"
+                placeholder="e.g., Gucci"
+                labelPlacement="outside"
+                {...register("brand")}
               />
             </div>
+
+            {/* Is Available */}
+            <div className="w-full mx-auto">
+              <Input
+                defaultValue="true"
+                type="text"
+                label="Is Available"
+                placeholder="true or false"
+                labelPlacement="outside"
+                {...register("isAvailable")}
+              />
+            </div>
+
+            {/* Stock */}
+            <div className="w-full mx-auto">
+              <Input
+                type="number"
+                label="Stock"
+                placeholder="e.g., 50"
+                labelPlacement="outside"
+                {...register("stock")}
+              />
+            </div>
+
+            {/* Available Colors */}
+            <div className="w-full mx-auto">
+              <Input
+              defaultValue="Black,Brown"
+                type="text"
+                label="Available Colors"
+                placeholder="e.g., Red, Blue, Green"
+                labelPlacement="outside"
+                {...register("availableColors", {
+                  // // required: "Available Colors are required",
+                })}
+              />
+              {errors.availableColors && (
+                <p className="text-red-500">{errors.availableColors.message}</p>
+              )}
+            </div>
+
+            {/* Available Sizes */}
+            <div className="w-full mx-auto">
+              <Input
+                defaultValue="M,L,XL,XXL"
+                type="text"
+                label="Available Sizes"
+                placeholder="e.g.,M,L,XL,XXL"
+                labelPlacement="outside"
+                {...register("availableSizes", {
+                  // // required: "Available Sizes are required",
+                })}
+              />
+              {errors.availableSizes && (
+                <p className="text-red-500">{errors.availableSizes.message}</p>
+              )}
+            </div>
+
+            {/* Recommended Products */}
+            <div className="w-full mx-auto">
+              <Input
+                type="text"
+                label="Recommended Products"
+                placeholder="e.g., product_id1, product_id2, product_id3"
+                labelPlacement="outside"
+                {...register("recommendedProducts", {
+                  // // required: "Recommended Products are required",
+                })}
+              />
+              {errors.recommendedProducts && (
+                <p className="text-red-500">
+                  {errors.recommendedProducts.message}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* File Upload */}
+          <div className="w-2/4 mx-auto mt-4 pb-4">
+            <label className="mb-1 text-sm text-center">Upload Image</label>
+            <input
+              type="file"
+              // {...register("file")}
+              className="border bg-white rounded-lg p-2 w-full flex justify-center"
+            />
+          </div>
 
           <div className="mt-4 flex justify-center">
             <MyButton color="primary" size="md" type="submit">

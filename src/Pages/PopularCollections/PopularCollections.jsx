@@ -12,7 +12,7 @@ import LazyLoad from "react-lazy-load";
 import ProductCard from "../Components/ProductCard/ProductCard";
 
 const PopularCollections = () => {
-  const {data :collection = []  , refacth , isLoading} = useCollection();
+  const { data: collection = [], refacth, isLoading } = useCollection();
   const { user } = useContext(AuthContext);
   const popularItems = collection.filter((item) => item.category === "Popular");
   const navigate = useNavigate();
@@ -82,9 +82,8 @@ const PopularCollections = () => {
   };
 
   const handleProductDetails = (item) => {
-    navigate(`/product-details/${item._id}`)
-  }
-
+    navigate(`/product-details/${item._id}`);
+  };
 
   return (
     <div>
@@ -96,18 +95,15 @@ const PopularCollections = () => {
         }
         button={"Create an account"}
       />
-      <Toaster
-  position="top-right"
-  reverseOrder={false}
-/>
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-10  mt-20 items-center justify-center ">
         {popularItems.slice(0, 8).map((item) => (
-         <ProductCard
-         key={item._id}
-         item={item}
-         handleAddToCart={handleAddToCart}
-         handleProductDetails={handleProductDetails}
-         ></ProductCard>
+          <ProductCard
+            key={item._id}
+            item={item}
+            handleAddToCart={handleAddToCart}
+            handleProductDetails={handleProductDetails}
+          ></ProductCard>
         ))}
         <AuthModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
       </div>

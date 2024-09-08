@@ -43,7 +43,7 @@ const ProductCard = ({ item, handleProductDetails, handleAddToCart }) => {
             {<item className="category"></item>}
           </p>
           <div className="flex -mt-1 ">
-            <p className="text-small  font-semibold"> Tk {item.price}</p>
+            <p className="text-small  font-semibold">{item.price} BDT </p>
             <div className="flex items-center">
               <StarIcon className="size-4 text-black" />
               <StarIcon className="size-4 text-black" />

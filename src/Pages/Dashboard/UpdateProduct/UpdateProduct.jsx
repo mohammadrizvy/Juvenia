@@ -42,7 +42,7 @@ const UpdateProduct = () => {
         navigate("/dashboard/manage-products"); // Redirect after successful update
       }
     } catch (error) {
-      toast.error("Error updating product");
+      // toast.error("Error updating product");
       console.error("Error updating product:", error);
     }
   };
