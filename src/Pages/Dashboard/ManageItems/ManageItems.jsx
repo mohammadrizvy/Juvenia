@@ -89,6 +89,9 @@ const handleUpdateProduct = (productId) => {
         <Table aria-label="Shopping Cart ">
           <TableHeader className="bg-gray-200">
             <TableColumn className="text-base">Product</TableColumn>
+            <TableColumn className="text-base">Colors</TableColumn>
+            <TableColumn className="text-base">Size</TableColumn>
+            <TableColumn className="text-base">Stock</TableColumn>
             <TableColumn className="text-base">Category</TableColumn>
             <TableColumn className="text-base">Price</TableColumn>
             <TableColumn className="text-base">Rating</TableColumn>
@@ -107,6 +110,13 @@ const handleUpdateProduct = (productId) => {
                     name={item.productName}
                   />
                 </TableCell>
+                <TableCell>
+                  {item.availableColors
+                    ? item.availableColors.join(", ")
+                    : "No colors available"}
+                </TableCell>
+                <TableCell>{item.availableSizes ? item.availableSizes.join(", ") : "No size availabe"}</TableCell>
+                <TableCell>{item.stock}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.price} TK</TableCell>
                 <TableCell className="flex items-center gap-2 mt-6">
